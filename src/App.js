@@ -1,23 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+// https://www.lovesofttech.com/react/reactReduxDirectoryStructure
+// https://juejin.cn/post/6880011662926364679
+// https://juejin.cn/post/7031509723190919175
+import Home from './containers/Home';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home></Home>
     </div>
   );
 }

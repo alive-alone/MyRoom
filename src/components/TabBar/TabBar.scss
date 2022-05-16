@@ -1,0 +1,25 @@
+.content {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  .body {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-around;
+    .item {
+      font-size: 12px;
+      img {
+        width: 30px;
+        height: 30px;
+      }
+      p {
+        margin: 0px;
+        color: #707070;
+      }
+      .p_active {
+        color: rgb(237, 198, 81);
+      }
+    }
+  }
+
+}

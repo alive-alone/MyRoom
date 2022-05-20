@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import './TabBar.scss';
 
 // 导入导航菜单图片
@@ -22,7 +23,7 @@ const tabItems = [
     title: '消息',
     img: home,
     img_active: home_active,
-    path: '/news'
+    path: '/information'
   },
   {
     title: '我的',
@@ -32,13 +33,15 @@ const tabItems = [
   }
 ]
 
+
+
 function TabBar(props) {
   return (
     <div className='content'>
       <div className='body'>
         {
-          tabItems.map((item) => (
-            <div className='item' key={item.path} onClick={() => props.setRouteActive(item.path)}>
+          tabItems.map((item, index) => (
+            <div className='item' key={index}>
               <img src={props.selectedTab === item.path ? item.img_active : item.img} alt=""></img>
               <p className={props.selectedTab === item.path ? 'p_active' : ""}>{item.title}</p>
             </div>

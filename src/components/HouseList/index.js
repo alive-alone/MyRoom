@@ -1,4 +1,7 @@
 import { useState } from "react"
+import {
+  useNavigate,
+} from 'react-router-dom';
 import { Grid, InfiniteScroll, List, DotLoading } from "antd-mobile"
 import image from "../../assets/images/01.jpg"
 import style from "./index.module.scss"
@@ -33,6 +36,7 @@ const InfiniteScrollContent = (value) => {
   )
 }
 function HouseList(props) {
+  const navigate = useNavigate();
   const [hasMore, setHasMore] = useState(true);
   let len = props.houseList.length;
   return (
@@ -41,7 +45,7 @@ function HouseList(props) {
         <Grid columns={2} gap={len} className={style.grid}>
           {
             props.houseList.map((item) => (
-              <Grid.Item key={item.id}>
+              <Grid.Item key={item.id} onClick={() => navigate(`/details/${item.id}`)}>
                 <div className={style.body}>
                   <div className={style.image}>
                     <img src={image} alt=""></img>

@@ -1,0 +1,332 @@
+.image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.image img {
+  height: 450px;
+  object-fit: cover;
+  transform: translate(-80px, -120px);
+}
+
+.house_info {
+  margin: 10px;
+  padding: 12px;
+  background-color: #ffffff;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.house_info .tips {
+  display: flex;
+  align-items: center;
+}
+
+.house_info .tips span {
+  font-size: 12px;
+  color: #595959;
+  font-weight: bold;
+  background-color: #f7f7f7;
+  padding: 3px 5px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.house_info .title {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.house_info .base_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.house_info .base_info .line {
+  width: 1.5px;
+  background-color: #f5f5f5;
+}
+
+.house_info .base_info .item {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.house_info .base_info .item .detail {
+  font-size: 18px;
+  color: #fb8422;
+  margin-bottom: 5px;
+}
+
+.house_info .base_info .item .type {
+  color: #aaaaaa;
+  font-size: 13px;
+}
+
+.house_info .details {
+  margin: 20px 0px 0px;
+}
+
+.house_info .details .item label {
+  font-weight: bold;
+  color: #aaaaaa;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.house_info .details .item span {
+  font-size: 15px;
+  font-weight: bold;
+  color: #595959;
+}
+
+.house_info .consult .item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.house_info .consult .item .name label {
+  font-weight: bold;
+  color: #aaaaaa;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.house_info .consult .item .name span {
+  font-size: 15px;
+  font-weight: bold;
+  color: #595959;
+}
+
+.house_info .consult .item .serve label {
+  color: #aaaaaa;
+  font-size: 18px;
+}
+
+.house_info .consult .item .serve span {
+  font-size: 15px;
+  font-weight: bold;
+  color: #fb8422;
+  margin-right: 5px;
+}
+
+.house_info .dynamic {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 15px 8px;
+  background-color: #fffaf7;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.house_info .dynamic span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #4f4e4e;
+}
+
+.house_info .dynamic .btn {
+  display: flex;
+  align-items: center;
+  color: #dd9c1a;
+  font-size: 13px;
+  border: 1px solid #eaac31;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.a {
+  color: #f8a515;
+}
+
+.recom_broker {
+  margin: 10px;
+  padding: 12px;
+  background-color: #ffffff;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.recom_broker .title {
+  font-size: 17px;
+  font-weight: bolder;
+  margin: 0px 0px 10px;
+}
+
+.recom_broker .brokers .broker {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.recom_broker .brokers .broker .avatar {
+  display: flex;
+  align-items: center;
+}
+
+.recom_broker .brokers .broker .avatar img {
+  width: 40px;
+  height: 40px;
+  background-color: #ffe3aa;
+  border: none;
+  border-radius: 50%;
+}
+
+.recom_broker .brokers .broker .info {
+  margin: 0 10px;
+  flex: 1;
+}
+
+.recom_broker .brokers .broker .info .base {
+  display: flex;
+  align-items: center;
+}
+
+.recom_broker .brokers .broker .info .base .name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.recom_broker .brokers .broker .info .base .depart {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin: 0px 10px;
+}
+
+.recom_broker .brokers .broker .info .advantage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 0px;
+}
+
+.recom_broker .brokers .broker .info .advantage span {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.recom_broker .brokers .broker .info .advantage .points {
+  color: #e87800;
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.recom_broker .brokers .broker .info .advantage .line {
+  width: 1px;
+  height: 13px;
+  background-color: #878787;
+  margin: 0px 5px;
+}
+
+.recom_broker .brokers .broker .info .tips {
+  padding: 6px 0px;
+}
+
+.recom_broker .brokers .broker .info .tips span {
+  display: inline-block;
+  font-size: 8px;
+  border: 1px solid #e4e4e4f8;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: 0px 5px 2px 0px;
+}
+
+.recom_broker .brokers .broker .contact {
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.recom_broker .brokers .broker .contact .type {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recom_broker .brokers .broker .contact .type .circle {
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #fff9ed;
+}
+
+.recom_broker .brokers .broker .contact .type .circle img {
+  width: 20px;
+  height: 20px;
+}
+
+.contact_broker {
+  padding: 0px 25px;
+  height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact_broker .broker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact_broker .broker img {
+  width: 35px;
+  height: 35px;
+  background-color: #ffe3aa;
+  border: none;
+  border-radius: 50%;
+}
+
+.contact_broker .broker span {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.contact_broker .stars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact_broker .stars img {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+}
+
+.contact_broker .stars span {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.contact_broker .cont_type {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact_broker .cont_type div {
+  padding: 12px 30px;
+  color: #ffffff;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.contact_broker .cont_type .online {
+  background-color: #ff9422;
+}
+
+.contact_broker .cont_type .phone {
+  background-color: #f65515;
+}

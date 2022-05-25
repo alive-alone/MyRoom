@@ -1,0 +1,6 @@
+.top-hint {
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    margin-left: 1em;
+}

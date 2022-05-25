@@ -10,7 +10,6 @@ import {
   useNavigate,
   Outlet,
   useRoutes
-
 } from 'react-router-dom';
 import style from "./Home.module.scss"
 // CSS Modules
@@ -24,6 +23,7 @@ import News from "../News/index"
 import Recommend from "../Recommend/index"
 import Mine from "../Mine/index"
 import Index from "../Index/index"
+
 function setRouteActive(path) {
   store.dispatch(CHANGE_TAB(path));
 }

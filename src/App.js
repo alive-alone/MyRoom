@@ -1,12 +1,11 @@
 import { Suspense } from "react"
 import './App.css';
 import Home from './containers/Home';
+import HouseDetails from "./containers/HouseDetails";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
-  useNavigate,
   Navigate
 } from 'react-router-dom';
 import News from "./containers/News";
@@ -20,11 +19,11 @@ function App() {
       <Suspense fallback={<div className="route-loading">loading...</div>}>
         <div className="App">
           <Routes>
+            <Route path="/" element={<Navigate to="/home"></Navigate>}></Route>
             <Route path="/home/*" element={<Home></Home>} />
-            <Route path="/news/*" element={<News></News>} />
-            <Route path="/" element={<Navigate to="/home/*"></Navigate>}></Route>
+            <Route path="/details/:id" element={<HouseDetails></HouseDetails>}></Route>
           </Routes>
-        </div>
+        </div>  
       </Suspense>
     </Router >
   );

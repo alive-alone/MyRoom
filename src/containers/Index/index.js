@@ -153,6 +153,94 @@ const houseList = [
     years: "2017年",
     loca: "前海时代CEO公馆（南山-前海）"
   },
+  {
+    id: 8,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 9,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 10,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 11,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 12,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 13,
+    title: "5室2厅 前海时代CEO公馆厅前海时代CEO公馆厅前海时代CEO公馆厅前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 14,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
+  {
+    id: 15,
+    title: "5室2厅 前海时代CEO公馆",
+    price: "1964.11",
+    house_type: "5室2厅",
+    area: "183.39平",
+    is_elevator: true,
+    reno_type: "简装修",
+    years: "2017年",
+    loca: "前海时代CEO公馆（南山-前海）"
+  },
 ]
 
 function FuncNav() {
@@ -189,12 +277,15 @@ function Index() {
         <NavHeader back={null} right={<Right></Right>} children={<InputBox placeholder="南光捷佳大厦" readOnly={true} left={true}></InputBox>}>
         </NavHeader>
       </div>
-      <div className={style.funcNav}>
-        <FuncNav></FuncNav>
+      <div className={style.list}>
+        <div className={style.funcNav}>
+          <FuncNav></FuncNav>
+        </div>
+        <div>
+          <HouseList houseList={houseList}></HouseList>
+        </div>
       </div>
-      <div>
-        <HouseList houseList={houseList}></HouseList>
-      </div>
+
     </div>
   );
 }

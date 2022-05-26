@@ -22,7 +22,7 @@ function App() {
             <Route path="/home/*" element={<Home></Home>} />
             <Route path="/" element={<Navigate to="/home/*"></Navigate>}></Route>
           </Routes>
-        </div>
+        </div>  
       </Suspense>
     </Router >
   );

@@ -5,14 +5,13 @@ import {
 import { NavBar } from "antd-mobile"
 import style from "./index.module.scss"
 
-function DefaultHandler() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(-1)
-  })
-}
+
 
 function NavHeader(props) {
+  const navigate = useNavigate();
+  function DefaultHandler() {
+    navigate(-1);
+  }
   return (
     <NavBar
       className={style.navbar}
@@ -23,7 +22,6 @@ function NavHeader(props) {
       left={props.left}
       right={props.right}
     >
-
     </NavBar>
   )
 }

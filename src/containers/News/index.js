@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import { MailOutline } from "antd-mobile-icons";
 import "./index.css";
 import Item from "./Item/index";
+import store from '../../store';
+import TabBar from "../../components/TabBar/TabBar";
+import { CHANGE_TAB } from "../../store/actionTypes/tabTypes"
 
 // 从服务器读取数据
 // 聊天记录
@@ -139,6 +142,7 @@ function News() {
                         key: "delete",
                         text: "删除",
                         color: "danger",
+                        // 设置删除事件
                         onClick: async () => {
                           const result = await Dialog.confirm({
                             content: "确定要删除吗",
@@ -214,8 +218,21 @@ function News() {
           </Tabs>
         </PullToRefresh>
       </div>
+      <div>
+        <Link to="/news/hello">Hello</Link>
+      </div>
+      <div>
+      </div>
     </div>
   );
+}
+
+function Hello() {
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  )
 }
 
 export default News;

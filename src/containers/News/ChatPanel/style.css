@@ -1,0 +1,11 @@
+.input-area {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.input-area input {
+    text-align: left;
+}

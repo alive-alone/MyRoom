@@ -7,17 +7,14 @@ import {
   Dialog,
   Toast,
 } from "antd-mobile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MailOutline } from "antd-mobile-icons";
 import "./index.css";
 import Item from "./Item/index";
-import store from '../../store';
-import TabBar from "../../components/TabBar/TabBar";
-import { CHANGE_TAB } from "../../store/actionTypes/tabTypes"
 
 // 从服务器读取数据
 // 聊天记录
-let message = [
+const message = [
   {
     id: 1,
     other: "xiaoming",
@@ -61,7 +58,8 @@ const notice = [
 ];
 
 // 总的信息应该由消息和通知组成
-const Myinfo = { message, notice };
+const myInfo = { message, notice };
+const refreashInfo = JSON.parse(JSON.stringify(myInfo))
 
 // 从右到左滑动手势
 const rightActions = [
@@ -88,7 +86,8 @@ const rightActions = [
 ];
 
 function News() {
-  const [info, setInfo] = useState(Myinfo);
+  const [info, setInfo] = useState(myInfo);
+  const navigate = useNavigate()
 
   function handleMessageDelete(index) {
     setInfo((prevState) => {
@@ -123,7 +122,7 @@ function News() {
       <div>
         {/* 下拉刷新区域 */}
         <PullToRefresh onRefresh={async () => {
-          setInfo({...Myinfo})
+          // 刷新操作
         }}
         renderText={
           status => {
@@ -164,7 +163,7 @@ function News() {
                     ]}
                     closeOnTouchOutside={true}
                   >
-                    <Card key={item.id} className="card">
+                    <Card key={item.id} className="card" onClick={() => navigate(`/message/${item.id}`)}>
                       {/* 手机上访问不能正确显示message，似乎不支持at方法，已用长度下标替代 */}
                       <Item
                         name={item.other}
@@ -206,7 +205,7 @@ function News() {
                     ]}
                     key={item.id}
                   >
-                    <Card key={item.id} className="card">
+                    <Card key={item.id} className="card" onClick={() => navigate(`/notice/${item.id}`)}>
                       <Item name={item.other} message={item.text} />
                     </Card>
                   </SwipeAction>
@@ -218,21 +217,8 @@ function News() {
           </Tabs>
         </PullToRefresh>
       </div>
-      <div>
-        <Link to="/news/hello">Hello</Link>
-      </div>
-      <div>
-      </div>
     </div>
   );
-}
-
-function Hello() {
-  return (
-    <div>
-      <h1>Hello</h1>
-    </div>
-  )
 }
 
 export default News;

@@ -1,0 +1,10 @@
+/* 控制消息出现在左边还是右边 */
+.left {
+    position: fixed;
+    left: 0;
+}
+
+.right {
+    position: fixed;
+    right: 0;
+}

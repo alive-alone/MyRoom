@@ -27,19 +27,25 @@
   
           }
         }
-        .title {
-          display: -webkit-box;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-box-orient: vertical;
-          word-break: break-all;
-          white-space: nowrap;
-          font-size: 14px;
-          font-weight: bold;
-        }
+
         .details {
           padding: 10px 6px;
           text-align: left;
+          overflow: hidden;
+          .title {
+            width: 100%;
+            span {
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              word-break: break-all;
+              white-space: nowrap;
+              font-size: 15px;
+              font-weight: bold;
+            }
+
+          }
           .detail {
             padding: 6px 0px;
             span {

@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import './App.css';
 import Home from './containers/Home';
 import HouseDetails from "./containers/HouseDetails";
+import NotFount from "./containers/NotFount";
 import {
   BrowserRouter as Router,
   Route,
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Navigate to="/home"></Navigate>}></Route>
             <Route path="/home/*" element={<Home></Home>} />
             <Route path="/details/:id" element={<HouseDetails></HouseDetails>}></Route>
+            <Route path="/*" element={<NotFount></NotFount>} />
           </Routes>
         </div>
       </Suspense>

@@ -5,13 +5,8 @@ import NavHeader from "../../components/NavHeader"
 
 import { HouseInfo, ShowImg, RecomBroker, OnlineContact } from "../../components/HouseDetails"
 
-// function handleScroll(){
-
-//   document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-// }
-
 function HouseDetails() {
+  const images = [image, image, image, image]
   const details = {
     id: 0,
     title: "5室2厅 前海时代CEO公馆",
@@ -59,27 +54,10 @@ function HouseDetails() {
   const [topLength, setTopLength] = useState(0);
   const listScroll = () => {
     setTopLength(divRef.current.getBoundingClientRect().top);
-    console.log(topLength);
   }
-  // useEffect(() => {
-  //   console.log(document
-  //     .getElementById('list'))
-  //   document
-  //     .getElementById('list')
-  //     .addEventListener('scroll', console.log(11111));
-  //   if (divRef.current) {
-  //     topLength = divRef.current.getBoundingClientRect().top;
-  //     console.log(topLength);
-  //   }
-  // }, []);
-
   return (
     <div className={style.list} id="list" onScrollCapture={() => listScroll()}>
       <div className={style.house_details} >
-        {/* <div className={style.image}>
-        <img src={image} alt=""></img>
-        {topLength >= -250 ? style.navHeader : ""}
-      </div> */}
         <div className={`${style.navHeader} ${topLength >= -200 ? style.navHeader_1 : ""}`}>
           {
             topLength >= -200 ? <NavHeader back={""} right={null} children={""}></NavHeader>
@@ -87,7 +65,7 @@ function HouseDetails() {
           }
         </div >
         <div ref={divRef} className="show_img">
-          <ShowImg image={image} ></ShowImg>
+          <ShowImg images={images} ></ShowImg>
         </div>
         <HouseInfo details={details}></HouseInfo>
         <RecomBroker brokers={brokers}></RecomBroker>

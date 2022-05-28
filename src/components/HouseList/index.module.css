@@ -36,20 +36,25 @@
   border-radius: 10px 10px 0px 0px;
 }
 
-.content .list .grid .body .title {
+.content .list .grid .body .details {
+  padding: 10px 6px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.content .list .grid .body .details .title {
+  width: 100%;
+}
+
+.content .list .grid .body .details .title span {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   word-break: break-all;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-}
-
-.content .list .grid .body .details {
-  padding: 10px 6px;
-  text-align: left;
 }
 
 .content .list .grid .body .details .detail {

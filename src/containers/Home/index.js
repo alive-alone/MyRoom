@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy } from "react"
 import store from '../../store';
+import useStorage from "../../utils/storage"
 import TabBar from "../../components/TabBar/TabBar";
 import { CHANGE_TAB } from "../../store/actionTypes/tabTypes"
 import {
@@ -10,7 +11,6 @@ import {
   useNavigate,
   Outlet,
   useRoutes
-
 } from 'react-router-dom';
 import style from "./Home.module.scss"
 // CSS Modules
@@ -25,11 +25,13 @@ import Recommend from "../Recommend/index"
 import Mine from "../Mine/index"
 import Index from "../Index/index"
 function setRouteActive(path) {
+  useStorage.set("selectedTab", path);
   store.dispatch(CHANGE_TAB(path));
 }
 
 function Home() {
-  const [seleTab, setSeleTab] = useState("/home");
+  const Tab = useStorage.get("selectedTab");
+  const [seleTab, setSeleTab] = useState(Tab === null ? "/home" : Tab);
   const navigate = useNavigate();
   useEffect(() => {
     store.subscribe(() => {

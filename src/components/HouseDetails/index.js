@@ -1,32 +1,93 @@
 import { useState } from "react"
-import { ImageViewer, Grid } from 'antd-mobile'
+import { ImageViewer, Grid, Swiper, Popup } from 'antd-mobile'
 import style from "./index.module.scss"
+import Parser from "../../components/Parser/index"
 import infoIcon from "../../assets/icon/info.svg"
 import telephoneIcon from "../../assets/icon/telephone.svg"
 import peo01Ing from "../../assets/images/peo01.jpg"
 import peo02Ing from "../../assets/images/peo02.jpg"
 import peo03Ing from "../../assets/images/peo03.jpg"
 import starts from "../../assets/icon/starts.svg"
-function ShowImg(props) {
-  const [visible, setVisible] = useState(false)
+import show from "../../assets/icon/show.svg"
+
+function ShowParser() {
+  const modules = {
+    "author": "Ming",
+    "canvasProportion": "1.00",
+    "date": "2022-05-25T14:47:40.937Z",
+    "name": "汤臣一品吴彦祖套房",
+    "children": [
+      {
+        "id": "QmgGMat6D47aQJqbJ79Gk",
+        "name": "",
+        "position": "absolute",
+        "type": "text",
+        "content": "我是文字",
+        "left": "3%",
+        "top": "3%",
+        "height": "35%",
+        "width": "95%",
+        "fontSize": 2,
+        "zIndex": 2,
+        "color": "#000"
+      }
+    ]
+  }
   return (
-    <>
-      <div>
-        <div className={style.image}>
-          <img alt="" src={props.image}
+    <div className="Recommend">
+      <Parser modules={modules.children}></Parser>
+    </div>
+  );
+}
+
+function ShowImg(props) {
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [showImg, setshowImg] = useState(props.images[0])
+  return (
+    <div>
+      <div className={style.image}>
+        {/* autoplay autoplayInterval="5000" */}
+        <Swiper loop >
+          {
+            props.images.map((item, index) => (
+              <Swiper.Item key={index}>
+                <div className={style.image}>
+                  <img className={style.swiperImg} alt="" src={item}
+                    onClick={() => {
+                      setshowImg(item);
+                      setVisible(true);
+                    }}></img>
+                  {
+                    index === 0 ? <img onClick={() => setVisible2(true)} className={style.show} src={show} alt=""></img> : <></>
+                  }
+                </div>
+              </Swiper.Item>
+            ))
+          }
+        </Swiper>
+        {/* <img alt="" src={showImg}
             onClick={() => {
-              setVisible(true)
-            }}></img>
-        </div>
+              setshowImg(showImg);
+              setVisible(true);
+            }}></img> */}
       </div>
       <ImageViewer
-        image={props.image}
+        image={showImg}
         visible={visible}
         onClose={() => {
           setVisible(false)
         }}
       />
-    </>
+      <Popup
+        visible={visible2}
+        onMaskClick={() => {
+          setVisible2(false)
+        }}
+      >
+        <ShowParser></ShowParser>
+      </Popup>
+    </div>
   )
 }
 
@@ -233,6 +294,5 @@ function OnlineContact(props) {
     </div>
   )
 }
-
 
 export { HouseInfo, ShowImg, RecomBroker, OnlineContact }

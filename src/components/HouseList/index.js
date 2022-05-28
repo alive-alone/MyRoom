@@ -51,7 +51,9 @@ function HouseList(props) {
                     <img src={image} alt=""></img>
                   </div>
                   <div className={style.details}>
-                    <span className={style.title}>{item.title}</span>
+                    <div className={style.title}>
+                      <span className={style.title}>{item.title}</span>
+                    </div>
                     <div className={style.detail}>
                       <span>{item.house_type}</span>
                       <span>{item.area}</span>

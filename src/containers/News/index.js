@@ -14,6 +14,8 @@ import Item from "./Item/index";
 
 // 从服务器读取数据
 // 聊天记录
+// 聊天记录信息格式
+// id、user、text、time
 const message = [
   {
     id: 1,
@@ -23,10 +25,12 @@ const message = [
       {
         user: "me",
         text: "hello",
+        time: "yyyy-mm-dd",
       },
       {
         user: "xiaoming",
         text: "hi",
+        time: "yyyy-mm-dd",
       },
     ],
   },
@@ -38,10 +42,12 @@ const message = [
       {
         user: "me",
         text: "hello",
+        time: "yyyy-mm-dd",
       },
       {
         user: "xiaoming",
         text: "hi",
+        time: "yyyy-mm-dd",
       },
     ],
   },
@@ -54,12 +60,13 @@ const notice = [
     avatar: "avatar-icon",
     other: "system",
     text: "this is a notice",
+    time: 'yyyy-mm-dd'
   },
 ];
 
 // 总的信息应该由消息和通知组成
 const myInfo = { message, notice };
-const refreashInfo = JSON.parse(JSON.stringify(myInfo))
+const refreashInfo = JSON.parse(JSON.stringify(myInfo));
 
 // 从右到左滑动手势
 const rightActions = [
@@ -87,7 +94,7 @@ const rightActions = [
 
 function News() {
   const [info, setInfo] = useState(myInfo);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleMessageDelete(index) {
     setInfo((prevState) => {
@@ -99,19 +106,19 @@ function News() {
 
   function handleNoticeDelete(index) {
     setInfo((prevState) => {
-      const newState = {...prevState}
-      newState.notice.splice(index, 1)
-      return newState
-    })
+      const newState = { ...prevState };
+      newState.notice.splice(index, 1);
+      return newState;
+    });
   }
 
   // 设置下拉刷新状态文本
   const statusRecord = {
-    pulling: 'Draging...',
-    canRelease: 'Release now',
-    refreshing: 'Refreshing now',
-    complete: 'Done'
-  }
+    pulling: "Draging...",
+    canRelease: "Release now",
+    refreshing: "Refreshing now",
+    complete: "Done",
+  };
 
   return (
     <div className="News">
@@ -121,14 +128,15 @@ function News() {
       </div>
       <div>
         {/* 下拉刷新区域 */}
-        <PullToRefresh onRefresh={async () => {
-          // 刷新操作
-        }}
-        renderText={
-          status => {
-            return <div>{statusRecord[status]}</div>
-          }
-        }
+        <PullToRefresh
+          onRefresh={async () => {
+            // 刷新操作
+            const newMessage = JSON.parse(JSON.stringify(refreashInfo));
+            setInfo(newMessage);
+          }}
+          renderText={(status) => {
+            return <div>{statusRecord[status]}</div>;
+          }}
         >
           <Tabs defaultActiveKey="message">
             <Tabs.Tab title="消息" key={"message"}>
@@ -163,7 +171,11 @@ function News() {
                     ]}
                     closeOnTouchOutside={true}
                   >
-                    <Card key={item.id} className="card" onClick={() => navigate(`/message/${item.id}`)}>
+                    <Card
+                      key={item.id}
+                      className="card"
+                      onClick={() => navigate(`/message/${item.id}`)}
+                    >
                       {/* 手机上访问不能正确显示message，似乎不支持at方法，已用长度下标替代 */}
                       <Item
                         name={item.other}
@@ -205,7 +217,11 @@ function News() {
                     ]}
                     key={item.id}
                   >
-                    <Card key={item.id} className="card" onClick={() => navigate(`/notice/${item.id}`)}>
+                    <Card
+                      key={item.id}
+                      className="card"
+                      onClick={() => navigate(`/notice/${item.id}`)}
+                    >
                       <Item name={item.other} message={item.text} />
                     </Card>
                   </SwipeAction>

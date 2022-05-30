@@ -8,3 +8,7 @@
     position: fixed;
     right: 0;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,52 +1,82 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Tabs,
-  Card,
-  SwipeAction,
-  PullToRefresh,
   Dialog,
   Toast,
 } from "antd-mobile";
-import { Link, useNavigate } from "react-router-dom";
-import { MailOutline } from "antd-mobile-icons";
+import axios from "axios";
+import store from "../../store";
+import NewsPanel from "../../components/NewsPanel";
+
 import "./index.css";
-import Item from "./Item/index";
+import {
+  ACTION_UPDATE_MESSAGE_CHAT,
+  ACTION_UPDATE_MESSAGE_NOTICE,
+} from "../../store/actionTypes/messageTypes";
+
+// 所使用技术栈：
+// CSS框架、组件库：antd-mobile、tailwind css
+// 状态管理： redux
+// 路由管理： react-router
+// 异步请求库： axios
+
+// 一个用户id（uid）对应多个聊天记录id
+const myName = "xiaoming";
 
 // 从服务器读取数据
 // 聊天记录
 // 聊天记录信息格式
 // id、user、text、time
-const message = [
+// 如果要支持传文件功能，可以将text改为一个对象content，通过type来分辨消息类型
+const messages = [
   {
     id: 1,
-    other: "xiaoming",
-    avatar: "avatar-icon",
+    // 使用users数组代替单一other和avatar，支持更多人聊天
+    users: [
+      { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
+      { uuid: 3, userName: "xiaohong", avatar: "avatar-two" },
+    ],
     talkLog: [
       {
-        user: "me",
-        text: "hello",
+        uuid: 3,
+        userName: "xiaohong",
+        message: {
+          type: "text",
+          content: "hello",
+        },
         time: "yyyy-mm-dd",
       },
       {
-        user: "xiaoming",
-        text: "hi",
+        uuid: 1,
+        userName: "xiaoming",
+        message: {
+          type: "text",
+          content: "hi",
+        },
         time: "yyyy-mm-dd",
       },
     ],
   },
   {
     id: 2,
-    other: "Tim",
-    avatar: "avatar-icon",
+    users: [
+      { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
+      { uuid: 2, userName: "xiaohong", avatar: "avatar-two" },
+    ],
     talkLog: [
       {
-        user: "me",
-        text: "hello",
+        userName: "xiaogang",
+        message: {
+          type: "text",
+          content: "hello",
+        },
         time: "yyyy-mm-dd",
       },
       {
-        user: "xiaoming",
-        text: "hi",
+        userName: "xiaoming",
+        message: {
+          type: "text",
+          content: "hi",
+        },
         time: "yyyy-mm-dd",
       },
     ],
@@ -54,18 +84,23 @@ const message = [
 ];
 
 // 通知消息
-const notice = [
+const notices = [
   {
     id: 3,
     avatar: "avatar-icon",
-    other: "system",
+    sender: "system",
     text: "this is a notice",
-    time: 'yyyy-mm-dd'
+    time: "yyyy-mm-dd",
   },
 ];
 
+// 向服务器发送请求
+// 根据用户id获取所有对应聊天记录的id以及通知id
+// 根据聊天记录id向服务器请求对应聊天记录、通知同理
+// 拿到聊天记录和通知后渲染到消息面板，并通过redux进行全局状态管理
+
 // 总的信息应该由消息和通知组成
-const myInfo = { message, notice };
+const myInfo = { messages: messages, notices: notices };
 const refreashInfo = JSON.parse(JSON.stringify(myInfo));
 
 // 从右到左滑动手势
@@ -93,148 +128,56 @@ const rightActions = [
 ];
 
 function News() {
-  const [info, setInfo] = useState(myInfo);
-  const navigate = useNavigate();
+  const [info, setInfo] = useState();
 
-  function handleMessageDelete(index) {
-    setInfo((prevState) => {
-      const newState = { ...prevState };
-      newState.message.splice(index, 1);
-      return newState;
+  // 将异步请求封装到高阶组件中
+  async function getDataAsync() {
+    const tids = await axios
+      .get(
+        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/uid2tid"
+      )
+      .then((response) => response.data);
+
+    const message = await axios
+      .get(
+        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/tid2talkLog"
+      )
+      .then((response) => response.data);
+
+    const notice = await axios
+      .get(
+        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/nid2notice"
+      )
+      .then((response) => response.data);
+
+    const messages = [];
+    const notices = [];
+    messages.push(message);
+    notices.push(notice);
+    // console.log({messages, notices})
+
+    // 设置每次dispatch后自动更新state
+    store.subscribe(() => {
+      setInfo({
+        messages: store.getState().messageReducer.messages,
+        notices: store.getState().messageReducer.notices,
+      });
     });
+
+    store.dispatch(ACTION_UPDATE_MESSAGE_CHAT(messages));
+    store.dispatch(ACTION_UPDATE_MESSAGE_NOTICE(notices));
   }
 
-  function handleNoticeDelete(index) {
-    setInfo((prevState) => {
-      const newState = { ...prevState };
-      newState.notice.splice(index, 1);
-      return newState;
-    });
-  }
-
-  // 设置下拉刷新状态文本
-  const statusRecord = {
-    pulling: "Draging...",
-    canRelease: "Release now",
-    refreshing: "Refreshing now",
-    complete: "Done",
-  };
+  // didmount
+  useEffect(() => {
+    getDataAsync();
+  }, []);
 
   return (
-    <div className="News">
-      <div className="top-hint">
-        <MailOutline fontSize={32} />
-        <h1>收件箱</h1>
-      </div>
-      <div>
-        {/* 下拉刷新区域 */}
-        <PullToRefresh
-          onRefresh={async () => {
-            // 刷新操作
-            const newMessage = JSON.parse(JSON.stringify(refreashInfo));
-            setInfo(newMessage);
-          }}
-          renderText={(status) => {
-            return <div>{statusRecord[status]}</div>;
-          }}
-        >
-          <Tabs defaultActiveKey="message">
-            <Tabs.Tab title="消息" key={"message"}>
-              {info.message.length > 0 ? (
-                info.message.map((item, index) => (
-                  <SwipeAction
-                    key={item.id}
-                    rightActions={[
-                      {
-                        key: "delete",
-                        text: "删除",
-                        color: "danger",
-                        // 设置删除事件
-                        onClick: async () => {
-                          const result = await Dialog.confirm({
-                            content: "确定要删除吗",
-                          });
-                          if (result) {
-                            // 由于只有组件中才能接收到index并处理delete，因此action只能写在这里，如果写在外面无法得到对应handler
-                            handleMessageDelete(index);
-                          }
-                        },
-                      },
-                      {
-                        key: "readed",
-                        text: "已读",
-                        color: "warning",
-                        onClick: async () => {
-                          // 处理badge的删除相关操作
-                        },
-                      },
-                    ]}
-                    closeOnTouchOutside={true}
-                  >
-                    <Card
-                      key={item.id}
-                      className="card"
-                      onClick={() => navigate(`/message/${item.id}`)}
-                    >
-                      {/* 手机上访问不能正确显示message，似乎不支持at方法，已用长度下标替代 */}
-                      <Item
-                        name={item.other}
-                        message={item.talkLog[message.length - 1].text}
-                      />
-                    </Card>
-                  </SwipeAction>
-                ))
-              ) : (
-                <h2>您没有未读消息</h2>
-              )}
-            </Tabs.Tab>
-            <Tabs.Tab title="通知" key={"notice"}>
-              {info.notice.length > 0 ? (
-                info.notice.map((item, index) => (
-                  <SwipeAction
-                    rightActions={[
-                      {
-                        key: "delete",
-                        text: "删除",
-                        color: "danger",
-                        onClick: async () => {
-                          const result = await Dialog.confirm({
-                            content: "确定要删除吗",
-                          });
-                          if (result) {
-                            handleNoticeDelete(index);
-                          }
-                        },
-                      },
-                      {
-                        key: "readed",
-                        text: "已读",
-                        color: "warning",
-                        onClick: async () => {
-                          // 处理badge的删除相关操作
-                        },
-                      },
-                    ]}
-                    key={item.id}
-                  >
-                    <Card
-                      key={item.id}
-                      className="card"
-                      onClick={() => navigate(`/notice/${item.id}`)}
-                    >
-                      <Item name={item.other} message={item.text} />
-                    </Card>
-                  </SwipeAction>
-                ))
-              ) : (
-                <h2>您没有未读通知</h2>
-              )}
-            </Tabs.Tab>
-          </Tabs>
-        </PullToRefresh>
-      </div>
+    <div>
+      <NewsPanel myName='xiaoming' refreashInfo={myInfo} info={info} />
     </div>
-  );
+  )
 }
 
 export default News;

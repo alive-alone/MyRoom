@@ -1,19 +1,23 @@
-const GET_MESSAGE = 'GET_MESSAGE'
-const SEND_MESSAGE = 'SEND_MESSAGE'
+const UPDATE_MESSAGE_CHAT = "UPDATE_MESSAGE_CHAT";
+const UPDATE_MESSAGE_NOTICE = "UPDATE_MESSAGE_NOTICE";
 
-function ACTION_GET_MESSAGE(id) {
-    return {
-        type: GET_MESSAGE,
-        id: id
-    }
+function ACTION_UPDATE_MESSAGE_CHAT(messages) {
+  return {
+    type: UPDATE_MESSAGE_CHAT,
+    messages,
+  };
 }
 
-function ACTION_SEND_MESSAGE(id, text) {
-    return {
-        type: SEND_MESSAGE,
-        id: id,
-        text: text
-    }
+function ACTION_UPDATE_MESSAGE_NOTICE(notices) {
+  return {
+    type: UPDATE_MESSAGE_NOTICE,
+    notices,
+  };
 }
 
-export {ACTION_GET_MESSAGE, ACTION_SEND_MESSAGE, GET_MESSAGE, SEND_MESSAGE}
+export {
+  UPDATE_MESSAGE_CHAT,
+  UPDATE_MESSAGE_NOTICE,
+  ACTION_UPDATE_MESSAGE_CHAT,
+  ACTION_UPDATE_MESSAGE_NOTICE,
+};

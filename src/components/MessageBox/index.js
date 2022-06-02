@@ -17,7 +17,7 @@ const MessageBox = (props) => {
           <img src={avatar} alt="avatar" className="rounded-full" />
         </div>
         <div
-          className={`${props.position === "left" ? "ml-2 mr-5" : "mr-2 ml-5"}`}
+          className={`${props.position === "left" ? "ml-2 mr-16" : "mr-2 ml-16"}`}
         >
           <div
             className={`text-gray-500 mx-2 font-sans ${
@@ -31,10 +31,7 @@ const MessageBox = (props) => {
               props.position === "left" ? "rounded-tl-none" : "rounded-tr-none"
             } px-2 py-2 font-sans break-all`}
           >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, labore
-            numquam. Harum quia non odio, sit officiis accusantium minima
-            necessitatibus dolorem laboriosam perspiciatis omnis natus
-            reiciendis a consequuntur reprehenderit magni?
+            Lorem ipsum dolor sit amet.
           </div>
         </div>
       </div>

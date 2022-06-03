@@ -1,31 +1,101 @@
 import NavHeader from "../../../components/NavHeader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Input, Space } from "antd-mobile";
 import { MoreOutline } from "antd-mobile-icons";
 import MessageBox from "../../../components/MessageBox";
+import MessagePanel from "../../../components/MessagePanel";
 import store from "../../../store";
+import './index.module.css'
+
+const message = {
+  id: 1,
+  // 使用users数组代替单一other和avatar，支持更多人聊天
+  users: [
+    { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
+    { uuid: 3, userName: "xiaohong", avatar: "avatar-two" },
+  ],
+  talkLog: [
+    {
+      user: {
+        uuid: 3,
+        userName: "xiaoming",
+        avatar: "",
+      },
+      message: {
+        type: "text",
+        content: "hello",
+      },
+      time: "yyyy-mm-dd",
+    },
+    {
+      user: {
+        uuid: 1,
+        userName: "xiaohong",
+        avatar: "",
+      },
+      message: {
+        type: "text",
+        content: "hi",
+      },
+      time: "yyyy-mm-dd",
+    },
+  ],
+};
 
 // 发现个bug，从二级页面返回时home的图标是一直在active状态的
 const ChatPanel = (props) => {
   const [inputValue, setInputValue] = useState("");
+  const [talkLog, setTalkLog] = useState(message.talkLog);
   const params = useParams();
   // 根据Params.id获取对应id的聊天记录
 
+  // 假设用户名为xiaoming
+  const myName = "xiaoming";
+  const myUuid = 1
+
+  useEffect(() => {
+    setTalkLog(message.talkLog);
+  }, []);
+
+  function handelSubmit() {
+    const text = inputValue
+    const newState = talkLog;
+    newState.push({
+      user: {userName: myName, avatar: '', uuid: myUuid},
+      message: { type: "text", content: text },
+      time: new Date().toLocaleString(),
+    });
+    setTalkLog(newState);
+    setInputValue("");
+  }
+
   return (
-    <div className="bg-gray-100 h-screen">
-      <div className="top-nav-area fixed w-full top-0">
-        <NavHeader right={<MoreOutline fontSize={24} />}>
-          对面名称(消息数)
-        </NavHeader>
-      </div>
-      <div className="message-show-area mt-10" onClick={() => console.log(params)}>
-        <MessageBox position="left" />
-        <MessageBox position="right" />
-        <MessageBox position="left" />
-        <MessageBox position="right" />
-        <MessageBox position="right" />
-      </div>
+    <div className="h-100">
+      <NavHeader
+        right={<MoreOutline fontSize={24} />}
+        className="top-nav-area fixed w-full top-0"
+      >
+        对面名称(消息数)
+      </NavHeader>
+
+      <MessagePanel
+        className="message-show-area mt-10"
+        onClick={() => console.log(params)}
+      >
+        {talkLog.map((item, index) => {
+          return (
+            <MessageBox
+              key={index}
+              userName={item.user.userName}
+              content={item.message?.content}
+              avatar={item.user.avatar}
+              time={item.time}
+              position={item.user.userName === myName ? "left" : "right"}
+            />
+          );
+        })}
+      </MessagePanel>
       {/* 占位元素，隔开fixed的输入区域与messagebox */}
       <div className="h-16"></div>
       {/* 可将输入区域做成一个组件。可以将onChange方法从主面板传入到输入框，实现在输入时顶部面板显示正在输入提示 */}
@@ -39,7 +109,7 @@ const ChatPanel = (props) => {
         />
         <button
           className="px-5 mr-1 h-full bg-green-500 text-color-gray-500 font-sans rounded-md text-white"
-          onClick={() => setInputValue("")}
+          onClick={() => handelSubmit()}
         >
           发送
         </button>

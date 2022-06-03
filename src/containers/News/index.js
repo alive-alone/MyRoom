@@ -21,24 +21,19 @@ import {
 
 // 一个用户id（uid）对应多个聊天记录id
 const myName = "xiaoming";
-
-// 从服务器读取数据
-// 聊天记录
-// 聊天记录信息格式
-// id、user、text、time
-// 如果要支持传文件功能，可以将text改为一个对象content，通过type来分辨消息类型
 const messages = [
   {
     id: 1,
-    // 使用users数组代替单一other和avatar，支持更多人聊天
     users: [
-      { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
-      { uuid: 3, userName: "xiaohong", avatar: "avatar-two" },
+      {  userName: "xiaoming", avatar: "avatar-one" },
+      {  userName: "xiaohong", avatar: "avatar-two" },
     ],
     talkLog: [
       {
-        uuid: 3,
-        userName: "xiaohong",
+        user: {
+          userName: 'xiaohong',
+          avatart: 'avatar',
+        },
         message: {
           type: "text",
           content: "hello",
@@ -46,8 +41,10 @@ const messages = [
         time: "yyyy-mm-dd",
       },
       {
-        uuid: 1,
-        userName: "xiaoming",
+        user: {
+          userName: 'xiaoming',
+          avatart: 'avatar',
+        },
         message: {
           type: "text",
           content: "hi",
@@ -59,12 +56,15 @@ const messages = [
   {
     id: 2,
     users: [
-      { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
-      { uuid: 2, userName: "xiaohong", avatar: "avatar-two" },
+      {  userName: "xiaoming", avatar: "avatar-one" },
+      {  userName: "xiaohong", avatar: "avatar-two" },
     ],
     talkLog: [
       {
-        userName: "xiaogang",
+        user: {
+          userName: 'xiaogang',
+          avatart: 'avatar',
+        },
         message: {
           type: "text",
           content: "hello",
@@ -72,7 +72,10 @@ const messages = [
         time: "yyyy-mm-dd",
       },
       {
-        userName: "xiaoming",
+        user: {
+          userName: 'xiaoming',
+          avatart: 'avatar',
+        },
         message: {
           type: "text",
           content: "hi",
@@ -99,7 +102,6 @@ const notices = [
 // 根据聊天记录id向服务器请求对应聊天记录、通知同理
 // 拿到聊天记录和通知后渲染到消息面板，并通过redux进行全局状态管理
 
-// 总的信息应该由消息和通知组成
 const myInfo = { messages: messages, notices: notices };
 const refreashInfo = JSON.parse(JSON.stringify(myInfo));
 
@@ -154,7 +156,6 @@ function News() {
     const notices = [];
     messages.push(message);
     notices.push(notice);
-    // console.log({messages, notices})
 
     // 设置每次dispatch后自动更新state
     store.subscribe(() => {

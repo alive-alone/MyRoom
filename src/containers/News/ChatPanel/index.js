@@ -12,13 +12,12 @@ const message = {
   id: 1,
   // 使用users数组代替单一other和avatar，支持更多人聊天
   users: [
-    { uuid: 1, userName: "xiaoming", avatar: "avatar-one" },
-    { uuid: 3, userName: "xiaohong", avatar: "avatar-two" },
+    {  userName: "xiaoming", avatar: "avatar-one" },
+    {  userName: "xiaohong", avatar: "avatar-two" },
   ],
   talkLog: [
     {
       user: {
-        uuid: 3,
         userName: "xiaoming",
         avatar: "",
       },
@@ -30,7 +29,6 @@ const message = {
     },
     {
       user: {
-        uuid: 1,
         userName: "xiaohong",
         avatar: "",
       },
@@ -48,13 +46,19 @@ const ChatPanel = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [talkLog, setTalkLog] = useState(message.talkLog);
   const params = useParams();
+
   // 根据Params.id获取对应id的聊天记录
+  async function getTalkLogById(){
+    const id = params.id
+    console.log(id)
+  }
 
   // 假设用户名为xiaoming
   const myName = "xiaoming";
   const myUuid = 1
 
   useEffect(() => {
+    getTalkLogById()
     setTalkLog(message.talkLog);
   }, []);
 

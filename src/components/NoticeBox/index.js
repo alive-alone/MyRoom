@@ -1,12 +1,14 @@
 
 const NoticeBox = (props) => {
     return (
-        <div>
-            <div className="date">日期</div>
+        <div className="flex justify-center">
+        <div className="font-sans text-gray-600 text-center">
+            <div className="date">{props.time}</div>
+            <div className="notice-image">{props.image}</div>
             <div className="notice">
-                <div className="notice-image">Notice Image</div>
-                <div className="notice-text">Notice Text</div>
+                <div className="">{props.text}</div>
             </div>
+        </div>
         </div>
     )
 }

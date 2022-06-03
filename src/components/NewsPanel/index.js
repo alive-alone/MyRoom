@@ -105,7 +105,7 @@ function NewsPanel(props) {
                             }
                           })()}
                           message={
-                            item.talkLog[info.messages.length - 1].message.content
+                            item.talkLog[item.talkLog.length - 1].message.content
                           }
                         />
                       </Card>

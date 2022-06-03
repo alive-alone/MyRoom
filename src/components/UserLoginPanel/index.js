@@ -10,7 +10,10 @@ const UserLoginPanel = () => {
     "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/client/login";
 
   function handleLogin(userName, password) {
+    // 登录输入规则校验
+    if(userName === '' || password === '') return Toast.show('用户名或密码不能为空')
     const data = { userName, password };
+    // 后端通信，验证用户是否登录成功，在用户名和密码都输入正确后才能登录并进入主页
     axios
       .post(url, data)
       .then((response) => {

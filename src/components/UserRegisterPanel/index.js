@@ -13,10 +13,15 @@ const UserRegister = () => {
     }
 
     function handleRegister(userName, password) {
+        // 注册输入规则校验
+        if(userName === '' || password === ''){
+            return Toast.show('用户名或密码不能为空')
+        }
         const data = {
             userName,
             password
         }
+        // 后端通信，校验用户是否已注册，注册成功则跳转到登录页面进行登录
         axios.post(url, data)
             .then(response => {
                 console.log(response)

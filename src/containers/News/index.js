@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Dialog,
-  Toast,
-} from "antd-mobile";
+import { Dialog, Toast } from "antd-mobile";
 import axios from "axios";
 import store from "../../store";
 import NewsPanel from "../../components/NewsPanel";
@@ -21,18 +18,18 @@ import {
 
 // 一个用户id（uid）对应多个聊天记录id
 const myName = "xiaoming";
-const messages = [
+const myMessages = [
   {
     id: 1,
     users: [
-      {  userName: "xiaoming", avatar: "avatar-one" },
-      {  userName: "xiaohong", avatar: "avatar-two" },
+      { userName: "xiaoming", avatar: "avatar-one" },
+      { userName: "xiaohong", avatar: "avatar-two" },
     ],
     talkLog: [
       {
         user: {
-          userName: 'xiaohong',
-          avatart: 'avatar',
+          userName: "xiaohong",
+          avatart: "avatar",
         },
         message: {
           type: "text",
@@ -42,8 +39,8 @@ const messages = [
       },
       {
         user: {
-          userName: 'xiaoming',
-          avatart: 'avatar',
+          userName: "xiaoming",
+          avatart: "avatar",
         },
         message: {
           type: "text",
@@ -56,14 +53,14 @@ const messages = [
   {
     id: 2,
     users: [
-      {  userName: "xiaoming", avatar: "avatar-one" },
-      {  userName: "xiaohong", avatar: "avatar-two" },
+      { userName: "xiaoming", avatar: "avatar-one" },
+      { userName: "xiaohong", avatar: "avatar-two" },
     ],
     talkLog: [
       {
         user: {
-          userName: 'xiaogang',
-          avatart: 'avatar',
+          userName: "xiaogang",
+          avatart: "avatar",
         },
         message: {
           type: "text",
@@ -73,8 +70,8 @@ const messages = [
       },
       {
         user: {
-          userName: 'xiaoming',
-          avatart: 'avatar',
+          userName: "xiaoming",
+          avatart: "avatar",
         },
         message: {
           type: "text",
@@ -87,7 +84,7 @@ const messages = [
 ];
 
 // 通知消息
-const notices = [
+const myNotices = [
   {
     id: 3,
     avatar: "avatar-icon",
@@ -102,7 +99,7 @@ const notices = [
 // 根据聊天记录id向服务器请求对应聊天记录、通知同理
 // 拿到聊天记录和通知后渲染到消息面板，并通过redux进行全局状态管理
 
-const myInfo = { messages: messages, notices: notices };
+const myInfo = { messages: myMessages, notices: myNotices };
 const refreashInfo = JSON.parse(JSON.stringify(myInfo));
 
 // 从右到左滑动手势
@@ -134,39 +131,44 @@ function News() {
 
   // 将异步请求封装到高阶组件中
   async function getDataAsync() {
-    const tids = await axios
-      .get(
-        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/uid2tid"
-      )
-      .then((response) => response.data);
+    try {
+      const tids = await axios
+        .get(
+          "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/uid2tid"
+        )
+        .then((response) => response.data);
 
-    const message = await axios
-      .get(
-        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/tid2talkLog"
-      )
-      .then((response) => response.data);
+      const message = await axios
+        .get(
+          "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/tid2talkLog"
+        )
+        .then((response) => response.data);
 
-    const notice = await axios
-      .get(
-        "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/nid2notice"
-      )
-      .then((response) => response.data);
+      const notice = await axios
+        .get(
+          "https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/notice"
+        )
+        .then((response) => response.data);
 
-    const messages = [];
-    const notices = [];
-    messages.push(message);
-    notices.push(notice);
+      const messages = [];
+      const notices = [];
+      messages.push(message);
+      notices.push(notice);
 
-    // 设置每次dispatch后自动更新state
-    store.subscribe(() => {
-      setInfo({
-        messages: store.getState().messageReducer.messages,
-        notices: store.getState().messageReducer.notices,
+      // 设置每次dispatch后自动更新state
+      store.subscribe(() => {
+        setInfo({
+          messages: store.getState().messageReducer.messages,
+          notices: store.getState().messageReducer.notices,
+        });
       });
-    });
 
-    store.dispatch(ACTION_UPDATE_MESSAGE_CHAT(messages));
-    store.dispatch(ACTION_UPDATE_MESSAGE_NOTICE(notices));
+      store.dispatch(ACTION_UPDATE_MESSAGE_CHAT(messages));
+      store.dispatch(ACTION_UPDATE_MESSAGE_NOTICE(notices));
+      
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   // didmount
@@ -176,9 +178,9 @@ function News() {
 
   return (
     <div>
-      <NewsPanel myName='xiaoming' refreashInfo={myInfo} info={info} />
+      <NewsPanel myName="xiaoming" refreashInfo={myInfo} info={info} />
     </div>
-  )
+  );
 }
 
 export default News;

@@ -13,13 +13,15 @@ import show from "../../assets/icon/show.svg"
 
 function ShowParser() {
   const [codeJson, setCodeJson] = useState([]);
+  const [divScale, setDivScale] = useState(1);
   useEffect(() => {
     const res = getCodeJson();
     res.then((response) => {
       if (response.status === 200) {
         if (response.data.jsonList.length !== 0) {
           let len = response.data.jsonList.length
-          let data = JSON.parse(response.data.jsonList[len - 2].json_value)
+          let data = JSON.parse(response.data.jsonList[len - 1].json_value);
+          setDivScale(data.canvasProportion);
           setCodeJson([...data.data]);
         }
       }
@@ -27,7 +29,7 @@ function ShowParser() {
   }, [])
   return (
     <div>
-      <Parser modules={codeJson}></Parser>
+      <Parser modules={codeJson} divScale={divScale}></Parser>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect, lazy } from "react"
 import store from '../../store';
 import useStorage from "../../utils/storage"
@@ -28,8 +29,13 @@ function setRouteActive(path) {
   useStorage.set("selectedTab", path);
   store.dispatch(CHANGE_TAB(path));
 }
+=======
+import TabBar from "../../components/TabBar/TabBar";
+>>>>>>> origin/main
 
+var selectedTab = "/home";
 function Home() {
+<<<<<<< HEAD
   const Tab = useStorage.get("selectedTab");
   const [seleTab, setSeleTab] = useState(Tab === null ? "/home" : Tab);
   const navigate = useNavigate();
@@ -46,18 +52,11 @@ function Home() {
     );
   })
 
+=======
+>>>>>>> origin/main
   return (
-    <div className={style.Home}>
-      <Outlet />
-      <Routes>
-        <Route path="/" element={<Index></Index>} />
-        <Route path="/news" element={<News></News>} />
-        <Route path="/mine" element={<Mine></Mine>} />
-        <Route path="/recommend" element={<Recommend></Recommend>} />
-      </Routes>
-      <div className={style.TabBar}>
-        <TabBar selectedTab={seleTab} setRouteActive={setRouteActive}></TabBar>
-      </div>
+    <div className='content'>
+      <TabBar selectedTab={selectedTab}></TabBar>
     </div>
   );
 }

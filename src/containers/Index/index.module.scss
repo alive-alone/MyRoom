@@ -16,28 +16,38 @@
       height: 25px;
     }
   }
-  .funcNav {
-    margin-top: 55px;
-    .func_nav {
-      margin: 0 8px;
-      // background-color: #fff;
-      border-radius: 20px;
-      padding: 15px 10px;
-      .func_nav_item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        img {
-          width: 40px;
-          height: 40px;
-        }
-        .title {
-          font-size: 12px;
-          letter-spacing: 1px;
-          color: #333;
+  .list {
+    // height: 100vh;
+    // overflow: scroll;
+    .funcNav {
+      margin-top: 55px;
+      .func_nav {
+        margin: 0 8px;
+        // background-color: #fff;
+        border-radius: 20px;
+        padding: 15px 10px;
+        .func_nav_item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 40px;
+            height: 40px;
+          }
+          .title {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #333;
+          }
         }
       }
     }
+  }
+  .list::-webkit-scrollbar{
+    display:none;
+  }
+  .scroll {
+    padding-bottom: 57px;
   }
 }

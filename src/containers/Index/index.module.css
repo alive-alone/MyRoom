@@ -22,30 +22,38 @@
   height: 25px;
 }
 
-.Index .funcNav {
+.Index .list .funcNav {
   margin-top: 55px;
 }
 
-.Index .funcNav .func_nav {
+.Index .list .funcNav .func_nav {
   margin: 0 8px;
   border-radius: 20px;
   padding: 15px 10px;
 }
 
-.Index .funcNav .func_nav .func_nav_item {
+.Index .list .funcNav .func_nav .func_nav_item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.Index .funcNav .func_nav .func_nav_item img {
+.Index .list .funcNav .func_nav .func_nav_item img {
   width: 40px;
   height: 40px;
 }
 
-.Index .funcNav .func_nav .func_nav_item .title {
+.Index .list .funcNav .func_nav .func_nav_item .title {
   font-size: 12px;
   letter-spacing: 1px;
   color: #333;
+}
+
+.Index .list::-webkit-scrollbar {
+  display: none;
+}
+
+.Index .scroll {
+  padding-bottom: 57px;
 }

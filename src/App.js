@@ -1,12 +1,12 @@
-import { Suspense } from "react"
+import React, { Suspense } from "react"
 import './App.css';
 import Home from './containers/Home';
+import HouseDetails from "./containers/HouseDetails";
+import NotFount from "./containers/NotFount";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
-  useNavigate,
   Navigate
 } from 'react-router-dom';
 import ChatPanel from "./containers/News/ChatPanel";
@@ -16,6 +16,19 @@ import UserLoginPanel from "./components/UserLoginPanel";
 // https://www.lovesofttech.com/react/reactReduxDirectoryStructure
 // https://juejin.cn/post/6880011662926364679
 // https://juejin.cn/post/7031509723190919175
+
+React.Component.prototype.dateFormat = function (dt) {
+  const date = new Date(dt)
+  const y = date.getFullYear()
+  const m = (date.getMonth + 1).toString().padStart(2, '0')
+  const d = date.getDate().toString().padStart(2, '0')
+
+  const hh = date.getHours().toString().padStart(2, '0')
+  const mm = date.getMinutes().toString().padStart(2, '0')
+  const ss = date.getSeconds().toString().padStart(2, '0')
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+}
 
 function App() {
   return (
@@ -29,6 +42,8 @@ function App() {
             <Route path="/home/*" element={<Home></Home>} />
             <Route path="/message/:id" element={<ChatPanel />} />
             <Route path="/notice/:id" element={<NoticePanel />} />
+            <Route path="/details/:id" element={<HouseDetails></HouseDetails>}></Route>
+            <Route path="/*" element={<NotFount></NotFount>} />
           </Routes>
         </div>  
       </Suspense>

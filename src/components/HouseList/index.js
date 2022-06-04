@@ -1,4 +1,7 @@
 import { useState } from "react"
+import {
+  useNavigate,
+} from 'react-router-dom';
 import { Grid, InfiniteScroll, List, DotLoading } from "antd-mobile"
 import image from "../../assets/images/01.jpg"
 import style from "./index.module.scss"
@@ -14,10 +17,58 @@ const aa = {
   years: "2017年",
   loca: "前海时代CEO公馆（南山-前海）"
 }
-
-function loadMore() {
-
+const bb = {
+  id: 3,
+  listing_name: "5室2厅 前海时代CEO公馆",
+  pricing: "1964.11万",
+  house_type: "5室2厅",
+  squaremeter: "183.39",
+  is_elevator: true,
+  reno_type: "简装修",
+  first_upload_at: "2017年",
+  loca: "前海时代CEO公馆（南山-前海）"
 }
+
+function compPrice(price) {
+  return Math.floor(price / 10000);
+}
+function propertyType(type) {
+  let res = "其他"
+  switch (type) {
+    case 1:
+      res = "普通住宅";
+      break;
+    case 2:
+      res = "普通住宅";
+      break;
+    case 3:
+      res = "普通住宅";
+      break;
+    case 4:
+      res = "普通住宅";
+      break;
+    case 5:
+      res = "普通住宅";
+      break;
+    case 6:
+      res = "普通住宅";
+      break;
+    case 7:
+      res = "普通住宅";
+      break;
+    case 8:
+      res = "普通住宅";
+      break;
+    case 9:
+      res = "普通住宅";
+      break;
+    default:
+      res = "其他";
+      break;
+  }
+  return res;
+}
+
 const InfiniteScrollContent = (value) => {
   return (
     <>
@@ -33,41 +84,41 @@ const InfiniteScrollContent = (value) => {
   )
 }
 function HouseList(props) {
-  const [hasMore, setHasMore] = useState(true);
-  let len = props.houseList.length;
+  const navigate = useNavigate();
   return (
     <div className={style.content}>
       <List header={props.header} className={style.list}>
-        <Grid columns={2} gap={len} className={style.grid}>
+        <Grid columns={2} gap={8} className={style.grid}>
           {
             props.houseList.map((item) => (
-              <Grid.Item key={item.id}>
+              <Grid.Item key={item.id} onClick={() => navigate(`/details/${item.id}`)}>
                 <div className={style.body}>
                   <div className={style.image}>
                     <img src={image} alt=""></img>
                   </div>
                   <div className={style.details}>
-                    <span className={style.title}>{item.title}</span>
+                    <div className={style.title}>
+                      <span className={style.title}>{item.listing_name}</span>
+                    </div>
                     <div className={style.detail}>
-                      <span>{item.house_type}</span>
-                      <span>{item.area}</span>
-                      <span>{item.reno_type}</span>
+                      <span>{`${item.floor_plan_room}室${item.floor_plan_hall}厅`}</span>
+                      <span>{propertyType(item.property_management_type)}</span>
+                      <span>{`${item.squaremeter / 100}m²`}</span>
                     </div>
                     <div className={style.bottom}>
-                      <span className={style.price}>{item.price}</span>
+                      <span className={style.price}>{compPrice(item.pricing)}</span>
                       <span className={style.unit}>万</span>
                       <span className={style.tip}>参考价</span>
                     </div>
                   </div>
-
                 </div>
               </Grid.Item>
             ))
           }
         </Grid>
       </List>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} className={style.scroll}>
-        <InfiniteScrollContent hasMore={hasMore} />
+      <InfiniteScroll threshold={100} loadMore={props.loadMore} hasMore={props.hasMore} className={style.scroll}>
+        <InfiniteScrollContent hasMore={props.hasMore} />
       </InfiniteScroll>
     </div>
   )

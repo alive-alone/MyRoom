@@ -1,0 +1,6 @@
+.item {
+    height: inherit;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+}

@@ -24,6 +24,7 @@ import News from "../News/index"
 import Recommend from "../Recommend/index"
 import Mine from "../Mine/index"
 import Index from "../Index/index"
+
 function setRouteActive(path) {
   useStorage.set("selectedTab", path);
   store.dispatch(CHANGE_TAB(path));

@@ -7,6 +7,8 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "antd-mobile": "^5.12.3",
+    "antd-mobile-icons": "^0.2.2",
+    "axios": "^0.27.2",
     "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "tailwindcss": "^3.0.24"
     "axios": "^0.27.2"
   }
 }

@@ -12,8 +12,8 @@ const message = {
   id: 1,
   // 使用users数组代替单一other和avatar，支持更多人聊天
   users: [
-    {  userName: "xiaoming", avatar: "avatar-one" },
-    {  userName: "xiaohong", avatar: "avatar-two" },
+    { userName: "xiaoming", avatar: "avatar-one" },
+    { userName: "xiaohong", avatar: "avatar-two" },
   ],
   talkLog: [
     {
@@ -48,9 +48,9 @@ const ChatPanel = (props) => {
   const params = useParams();
 
   // 根据Params.id获取对应id的聊天记录
-  async function getTalkLogById(){
+  async function getTalkLogById() {
     const id = params.id
-    console.log(id)
+    // console.log(id)
   }
 
   // 假设用户名为xiaoming
@@ -63,11 +63,11 @@ const ChatPanel = (props) => {
   }, []);
 
   function handelSubmit() {
-    if(inputValue === '') return Toast.show('输入为空，需要输入非空字符')
+    if (inputValue === '') return Toast.show('输入为空，需要输入非空字符')
     const text = inputValue
     const newState = talkLog;
     newState.push({
-      user: {userName: myName, avatar: '', uuid: myUuid},
+      user: { userName: myName, avatar: '', uuid: myUuid },
       message: { type: "text", content: text },
       time: new Date().toLocaleString(),
     });
@@ -86,7 +86,6 @@ const ChatPanel = (props) => {
 
       <MessagePanel
         className="message-show-area mt-10"
-        onClick={() => console.log(params)}
       >
         {talkLog.map((item, index) => {
           return (

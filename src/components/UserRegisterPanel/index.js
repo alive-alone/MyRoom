@@ -24,7 +24,7 @@ const UserRegister = () => {
         // 后端通信，校验用户是否已注册，注册成功则跳转到登录页面进行登录
         axios.post(url, data)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if(response.data.status ==='success'){
                     Toast.show('注册成功')
                     navigate('/')

@@ -47,9 +47,9 @@ function NewsPanel(props) {
 
   return (
     <div className="News">
-      <div className="top-hint">
+      <div className="flex items-center">
         <MailOutline fontSize={32} />
-        <h1>收件箱</h1>
+        <h1 className="text-xl font-sans">收件箱</h1>
       </div>
       <div>
         {/* 下拉刷新区域 */}
@@ -57,8 +57,8 @@ function NewsPanel(props) {
           className="ptr"
           onRefresh={async () => {
             // 刷新操作
-            const newMessage = JSON.parse(JSON.stringify(props.refreashInfo));
-            setInfo(newMessage);
+            props.refreashInfo.then(data => {
+              setInfo(data)})
           }}
           renderText={(status) => {
             return <div>{statusRecord[status]}</div>;
@@ -71,7 +71,7 @@ function NewsPanel(props) {
                 <div className="flex justify-center">
                 <DotLoading color="primary" />
                 </div>
-              ) : info.messages.length > 0 ? (
+              ) : info.messages?.length > 0 ? (
                 info.messages.map((item, index) => (
                   <SwipeAction
                     key={item.id}

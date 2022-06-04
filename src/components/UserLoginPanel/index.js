@@ -17,7 +17,7 @@ const UserLoginPanel = () => {
     axios
       .post(url, data)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.data.status === "success") {
             Toast.show('登录成功，进入主界面')
           navigate("/home");

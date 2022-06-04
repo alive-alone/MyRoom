@@ -7,6 +7,7 @@ import MessageBox from "../../../components/MessageBox";
 import MessagePanel from "../../../components/MessagePanel";
 import { SpinLoading } from "antd-mobile";
 import axios from "axios";
+import store from "../../../store";
 
 // 发现个bug，从二级页面返回时home的图标是一直在active状态的
 const ChatPanel = () => {
@@ -16,7 +17,7 @@ const ChatPanel = () => {
   const params = useParams();
 
   // 根据Params.id获取对应id的聊天记录
-  async function getTalkLogById(){
+  async function getTalkLogById() {
     const id = params.id
     const url =  'https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/client/getTalkLogByID'
     try{
@@ -34,6 +35,7 @@ const ChatPanel = () => {
       getOtherUserName()
     }
     catch(err) {console.log(err)}
+    // console.log(id)
   }
 
   // 假设用户名为xiaoming
@@ -44,7 +46,7 @@ const ChatPanel = () => {
   }, []);
 
   function handelSubmit() {
-    if(inputValue === '') return Toast.show('输入为空，需要输入非空字符')
+    if (inputValue === '') return Toast.show('输入为空，需要输入非空字符')
     const text = inputValue
     const newState = talkLog;
     newState.push({
@@ -67,7 +69,6 @@ const ChatPanel = () => {
 
       <MessagePanel
         className="message-show-area mt-10"
-        onClick={() => console.log(params)}
       >
         {talkLog.length === 0 ? 
         <div className="flex justify-center">

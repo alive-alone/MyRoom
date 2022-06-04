@@ -35,7 +35,7 @@ function HouseDetails() {
     },
     {
       id: 1,
-      name: "李亚南",
+      name: "王小美",
       depart: "乐有家",
       points: "4.6",
       familiarity: "1.5",
@@ -43,7 +43,7 @@ function HouseDetails() {
     },
     {
       id: 2,
-      name: "王小美",
+      name: "李亚南",
       depart: "乐有家",
       points: "4.6",
       familiarity: "1.5",
@@ -76,7 +76,7 @@ function HouseDetails() {
         <RecomBroker brokers={brokers}></RecomBroker>
       </div> */}
         <div className={style.online_contact}>
-          <OnlineContact broker={brokers[2]}></OnlineContact>
+          <OnlineContact broker={brokers[1]}></OnlineContact>
         </div>
       </div >
     </div>

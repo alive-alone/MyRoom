@@ -7,15 +7,11 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
 } from 'react-router-dom';
 import ChatPanel from "./containers/News/ChatPanel";
 import NoticePanel from "./containers/News/NoticePanel";
 import UserRegister from "./components/UserRegisterPanel";
 import UserLoginPanel from "./components/UserLoginPanel";
-// https://www.lovesofttech.com/react/reactReduxDirectoryStructure
-// https://juejin.cn/post/6880011662926364679
-// https://juejin.cn/post/7031509723190919175
 
 React.Component.prototype.dateFormat = function (dt) {
   const date = new Date(dt)
@@ -34,7 +30,7 @@ function App() {
   return (
     <Router >
       <Suspense fallback={<div className="route-loading">loading...</div>}>
-      <div className="App">
+        <div className="App">
           <Routes>
             {/* <Route path="/" element={<Navigate to="/home"></Navigate>}></Route> */}
             <Route path="/" element={<UserLoginPanel></UserLoginPanel>} />
@@ -45,7 +41,7 @@ function App() {
             <Route path="/details/:id" element={<HouseDetails></HouseDetails>}></Route>
             <Route path="/*" element={<NotFount></NotFount>} />
           </Routes>
-        </div>  
+        </div>
       </Suspense>
     </Router >
   );

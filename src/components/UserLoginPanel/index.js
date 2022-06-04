@@ -11,7 +11,7 @@ const UserLoginPanel = () => {
 
   function handleLogin(userName, password) {
     // 登录输入规则校验
-    if(userName === '' || password === '') return Toast.show('用户名或密码不能为空')
+    if (userName === '' || password === '') return Toast.show('用户名或密码不能为空')
     const data = { userName, password };
     // 后端通信，验证用户是否登录成功，在用户名和密码都输入正确后才能登录并进入主页
     axios
@@ -19,7 +19,7 @@ const UserLoginPanel = () => {
       .then((response) => {
         // console.log(response);
         if (response.data.status === "success") {
-            Toast.show('登录成功，进入主界面')
+          Toast.show('登录成功，进入主界面')
           navigate("/home");
         }
       })

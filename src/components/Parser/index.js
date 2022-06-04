@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState } from "react"
 import styles from "./index.module.scss"
 
-function resolver(module, divWidth) {
+function resolver(module, scale) {
   // const [scale, setScale] = useState(divWidth / 500);
-  let scale = divWidth / 500;
   let Type = module.type === "text" ? "span" : module.type;
   if (Type === "img") {
     return (
@@ -20,18 +19,20 @@ function resolver(module, divWidth) {
   }
 }
 function Parser(props) {
-  const [divWidth, setDivWidth] = useState(0);
+  // const [divWidth, setDivWidth] = useState(0);
+  const [scale, setScale] = useState(1);
   const modules = props.modules;
   const divRef = useRef();
   useEffect(() => {
     if (divRef.current) {
-      setDivWidth(divRef.current.clientWidth);
+      setScale(divRef.current.clientWidth / 500);
+      // setDivWidth(divRef.current.clientWidth);
     }
   }, []);
   return (
-    <div className={styles.parser} ref={divRef}>
+    <div className={styles.parser} style={{ height: `${props.divScale * 100}vw` }} ref={divRef}>
       {
-        modules.map((item) => resolver(item, divWidth))
+        modules.map((item) => resolver(item, scale))
       }
     </div>
   )

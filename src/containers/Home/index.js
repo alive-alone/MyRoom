@@ -13,8 +13,6 @@ import {
   useRoutes
 } from 'react-router-dom';
 import style from "./Home.module.scss"
-// CSS Modules
-// https://blog.csdn.net/weixin_58487208/article/details/121385538
 
 // const News = lazy(() => import('../News/index'))
 // const Recommend = lazy(() => import('../Recommend/index'))

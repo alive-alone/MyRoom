@@ -4,7 +4,7 @@
   overflow: hidden;
   position: relative;
   .swiperImg {
-    // width: 100%;
+    max-width: none;
     height: 450px;
     object-fit: cover;
     transform: translate(-80px,-120px);

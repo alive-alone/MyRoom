@@ -1,0 +1,9 @@
+.navbar {
+  color: #333;
+  background-color: #f6f5f6;
+  --height: 55px;
+}
+
+.navbar .am-navbar-title {
+  color: #333;
+}

@@ -1,0 +1,60 @@
+.Index {
+  width: 100%;
+  height: 100%;
+  background-color: #f8f8f8;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.Index .navHeader {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+}
+
+.Index .location {
+  display: flex;
+  align-items: center;
+}
+
+.Index .location img {
+  width: 25px;
+  height: 25px;
+}
+
+.Index .list {
+  height: 100vh;
+  overflow: scroll;
+}
+
+.Index .list .funcNav {
+  margin-top: 55px;
+}
+
+.Index .list .funcNav .func_nav {
+  margin: 0 8px;
+  border-radius: 20px;
+  padding: 15px 10px;
+}
+
+.Index .list .funcNav .func_nav .func_nav_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Index .list .funcNav .func_nav .func_nav_item img {
+  width: 40px;
+  height: 40px;
+}
+
+.Index .list .funcNav .func_nav .func_nav_item .title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+.Index .list::-webkit-scrollbar {
+  display: none;
+}

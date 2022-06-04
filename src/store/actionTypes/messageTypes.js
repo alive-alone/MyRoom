@@ -1,0 +1,23 @@
+const UPDATE_MESSAGE_CHAT = "UPDATE_MESSAGE_CHAT";
+const UPDATE_MESSAGE_NOTICE = "UPDATE_MESSAGE_NOTICE";
+
+function ACTION_UPDATE_MESSAGE_CHAT(messages) {
+  return {
+    type: UPDATE_MESSAGE_CHAT,
+    messages,
+  };
+}
+
+function ACTION_UPDATE_MESSAGE_NOTICE(notices) {
+  return {
+    type: UPDATE_MESSAGE_NOTICE,
+    notices,
+  };
+}
+
+export {
+  UPDATE_MESSAGE_CHAT,
+  UPDATE_MESSAGE_NOTICE,
+  ACTION_UPDATE_MESSAGE_CHAT,
+  ACTION_UPDATE_MESSAGE_NOTICE,
+};

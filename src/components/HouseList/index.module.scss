@@ -3,9 +3,14 @@
   height: 100%;
   background-color: #f8f8f8;
   overflow: hidden;
+  // height: 100vh;
+  // overflow: scroll;
+  // height: 100%;
   .list {
+
     --border-top: none;
     --border-bottom: none;
+
     .grid {
       background-color: #f8f8f8;
       .body {
@@ -35,12 +40,12 @@
           .title {
             width: 100%;
             span {
-              display: -webkit-box;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              -webkit-box-orient: vertical;
-              word-break: break-all;
-              white-space: nowrap;
+              // display: -webkit-box;
+              // overflow: hidden;
+              // text-overflow: ellipsis;
+              // -webkit-box-orient: vertical;
+              // word-break: break-all;
+              // white-space: nowrap;
               font-size: 15px;
               font-weight: bold;
             }
@@ -78,6 +83,6 @@
     }
   }
   .scroll {
-    margin-bottom: 57px;
+    padding-bottom: 57px;
   }
 }

@@ -47,12 +47,6 @@
 }
 
 .content .list .grid .body .details .title span {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
-  white-space: nowrap;
   font-size: 15px;
   font-weight: bold;
 }
@@ -91,5 +85,5 @@
 }
 
 .content .scroll {
-  margin-bottom: 57px;
+  padding-bottom: 57px;
 }

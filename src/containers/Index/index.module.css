@@ -22,11 +22,6 @@
   height: 25px;
 }
 
-.Index .list {
-  height: 100vh;
-  overflow: scroll;
-}
-
 .Index .list .funcNav {
   margin-top: 55px;
 }
@@ -57,4 +52,8 @@
 
 .Index .list::-webkit-scrollbar {
   display: none;
+}
+
+.Index .scroll {
+  padding-bottom: 57px;
 }

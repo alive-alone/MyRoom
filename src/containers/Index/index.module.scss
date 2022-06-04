@@ -17,8 +17,8 @@
     }
   }
   .list {
-    height: 100vh;
-    overflow: scroll;
+    // height: 100vh;
+    // overflow: scroll;
     .funcNav {
       margin-top: 55px;
       .func_nav {
@@ -46,5 +46,8 @@
   }
   .list::-webkit-scrollbar{
     display:none;
+  }
+  .scroll {
+    padding-bottom: 57px;
   }
 }

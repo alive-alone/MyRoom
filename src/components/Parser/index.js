@@ -1,35 +1,10 @@
+import { useRef, useEffect, useState } from "react"
 import styles from "./index.module.scss"
 
-// {
-//   "id": "49GKABgGbNwzT8GzhNGeh",
-//   "name": "",
-//   "position": "absolute",
-//   "type": "img",
-//   "content": "https://v3.cn.vuejs.org/images/sponsors/html_burger.png",
-//   "left": "12%",
-//   "top": "11%",
-//   "height": "9%",
-//   "width": "36%",
-//   "zIndex": 2
-// },
-// {
-//   "id": "mAMbPQE6GR5y-bv1uV9rn",
-//   "name": "",
-//   "position": "absolute",
-//   "type": "text",
-//   "content": "我是文字噢",
-//   "left": "21%",
-//   "top": "75%",
-//   "height": "4%",
-//   "width": "12%",
-//   "size": 16,
-//   "zIndex": 2,
-//   "color": "red"
-// },
-
-function resolver(module) {
+function resolver(module, divWidth) {
+  // const [scale, setScale] = useState(divWidth / 500);
+  let scale = divWidth / 500;
   let Type = module.type === "text" ? "span" : module.type;
-
   if (Type === "img") {
     return (
       <Type style={module} src={module.content} key={module.id} id={module.id} alt=""></Type>
@@ -40,16 +15,23 @@ function resolver(module) {
     )
   } else {
     return (
-      <Type style={{ ...module, "fontSize": `${module.fontSize}rem` }} key={module.id} id={module.id}>{module.content}</Type>
+      <Type style={{ ...module, "fontSize": `${module.fontSize * scale}rem` }} key={module.id} id={module.id}>{module.content}</Type>
     )
   }
 }
 function Parser(props) {
+  const [divWidth, setDivWidth] = useState(0);
   const modules = props.modules;
+  const divRef = useRef();
+  useEffect(() => {
+    if (divRef.current) {
+      setDivWidth(divRef.current.clientWidth);
+    }
+  }, []);
   return (
-    <div className={styles.parser}>
+    <div className={styles.parser} ref={divRef}>
       {
-        modules.map((item) => resolver(item))
+        modules.map((item) => resolver(item, divWidth))
       }
     </div>
   )

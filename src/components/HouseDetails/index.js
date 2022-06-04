@@ -25,148 +25,6 @@ function ShowParser() {
       }
     })
   }, [])
-  const modules = {
-    "author": "Ming",
-    "canvasProportion": "1.00",
-    "date": "2022-05-25T12:41:36.596Z",
-    "name": "汤臣一品吴彦祖套房",
-    "children": [
-      {
-        "id": "uY3dxeQOSeIrrRfrE_G0Q",
-        "name": "",
-        "position": "absolute",
-        "type": "video",
-        "content": "https://media.w3.org/2010/05/sintel/trailer.mp4",
-        "left": "0%",
-        "top": "0%",
-        "height": "38%",
-        "width": "68%",
-        "zIndex": 2
-      },
-      {
-        "id": "CmTOhBCsidxLIIE5wL1y0",
-        "name": "",
-        "position": "absolute",
-        "type": "audio",
-        "content": "https://assets.coderrocketfuel.com/pomodoro-times-up.mp3",
-        "left": "70%",
-        "top": "0%",
-        "height": "10%",
-        "width": "28%",
-        "zIndex": 2
-      },
-      {
-        "id": "NW1ZzzaWc0w8w8bHe_PW9",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/html_burger.png",
-        "left": "70%",
-        "top": "21%",
-        "height": "8%",
-        "width": "29%",
-        "zIndex": 2
-      },
-      {
-        "id": "BdVyIP_C2h7KpWlUcfiUX",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/foo.png",
-        "left": "70%",
-        "top": "13%",
-        "height": "7%",
-        "width": "29%",
-        "zIndex": 2
-      },
-      {
-        "id": "Bb0bNJAayFnzM6r-8OJ9W",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/fastcoding_inc.svg",
-        "left": "70%",
-        "top": "30%",
-        "height": "9%",
-        "width": "27%",
-        "zIndex": 2
-      },
-      {
-        "id": "pIDsveguaFHmUQ5oFFG1K",
-        "name": "",
-        "position": "absolute",
-        "type": "text",
-        "content": "啊哈哈哈哈哈哈",
-        "left": "0%",
-        "top": "79%",
-        "height": "12%",
-        "width": "66%",
-        "fontSize": 43,
-        "zIndex": 2,
-        "color": "#000"
-      },
-      {
-        "id": "Mqg2X3CSV58C6dAX-r3N0",
-        "name": "",
-        "position": "absolute",
-        "type": "audio",
-        "content": "https://assets.coderrocketfuel.com/pomodoro-times-up.mp3",
-        "left": "70%",
-        "top": "79%",
-        "height": "10%",
-        "width": "30%",
-        "zIndex": 2
-      },
-      {
-        "id": "kvYacivM7hS8-2xEehyMn",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/neds.png",
-        "left": "0%",
-        "top": "40%",
-        "height": "22%",
-        "width": "86%",
-        "zIndex": 2
-      },
-      {
-        "id": "NtsbMVSqLkcjBlP3-nCqx",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/vehikl.png",
-        "left": "0%",
-        "top": "65%",
-        "height": "9%",
-        "width": "33%",
-        "zIndex": 2
-      },
-      {
-        "id": "bYKr0IC86hblVhQGKrfv5",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/bestvpn_co.png",
-        "left": "36%",
-        "top": "65%",
-        "height": "9%",
-        "width": "31%",
-        "zIndex": 2
-      },
-      {
-        "id": "PxSekKhtuIzacBuowh5Xp",
-        "name": "",
-        "position": "absolute",
-        "type": "img",
-        "content": "https://v3.cn.vuejs.org/images/sponsors/vuemastery.png",
-        "left": "67%",
-        "top": "65%",
-        "height": "8%",
-        "width": "31%",
-        "zIndex": 2
-      }
-    ]
-  }
   return (
     <div>
       <Parser modules={codeJson}></Parser>
@@ -181,7 +39,6 @@ function ShowImg(props) {
   return (
     <div>
       <div className={style.image}>
-        {/* autoplay autoplayInterval="5000" */}
         <Swiper loop >
           {
             props.images.map((item, index) => (
@@ -200,11 +57,6 @@ function ShowImg(props) {
             ))
           }
         </Swiper>
-        {/* <img alt="" src={showImg}
-            onClick={() => {
-              setshowImg(showImg);
-              setVisible(true);
-            }}></img> */}
       </div>
       <ImageViewer
         image={showImg}

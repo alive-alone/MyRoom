@@ -15,7 +15,7 @@
   z-index: 5;
 }
 
-.list .house_details .navHeader_1 :global .NavHeader_navbar__CC-gk {
+.list .house_details .navHeader_1 :global .adm-nav-bar {
   color: #fff !important;
   background: none !important;
 }

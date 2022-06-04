@@ -1,33 +1,9 @@
-import { useState } from "react"
 import {
   useNavigate,
 } from 'react-router-dom';
 import { Grid, InfiniteScroll, List, DotLoading } from "antd-mobile"
 import image from "../../assets/images/01.jpg"
 import style from "./index.module.scss"
-
-const aa = {
-  id: 3,
-  title: "5室2厅 前海时代CEO公馆",
-  price: "1964.11万",
-  house_type: "5室2厅",
-  area: "183.39",
-  is_elevator: true,
-  reno_type: "简装修",
-  years: "2017年",
-  loca: "前海时代CEO公馆（南山-前海）"
-}
-const bb = {
-  id: 3,
-  listing_name: "5室2厅 前海时代CEO公馆",
-  pricing: "1964.11万",
-  house_type: "5室2厅",
-  squaremeter: "183.39",
-  is_elevator: true,
-  reno_type: "简装修",
-  first_upload_at: "2017年",
-  loca: "前海时代CEO公馆（南山-前海）"
-}
 
 function compPrice(price) {
   return Math.floor(price / 10000);

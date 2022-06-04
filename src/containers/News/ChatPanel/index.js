@@ -5,61 +5,44 @@ import { Toast } from "antd-mobile";
 import { MoreOutline } from "antd-mobile-icons";
 import MessageBox from "../../../components/MessageBox";
 import MessagePanel from "../../../components/MessagePanel";
+import { SpinLoading } from "antd-mobile";
+import axios from "axios";
 import store from "../../../store";
-import './index.module.css'
-
-const message = {
-  id: 1,
-  // 使用users数组代替单一other和avatar，支持更多人聊天
-  users: [
-    { userName: "xiaoming", avatar: "avatar-one" },
-    { userName: "xiaohong", avatar: "avatar-two" },
-  ],
-  talkLog: [
-    {
-      user: {
-        userName: "xiaoming",
-        avatar: "",
-      },
-      message: {
-        type: "text",
-        content: "你好啊",
-      },
-      time: "202/6/2 12:05:21",
-    },
-    {
-      user: {
-        userName: "xiaohong",
-        avatar: "",
-      },
-      message: {
-        type: "text",
-        content: "你好你好",
-      },
-      time: "2022/6/2 12:05:33",
-    },
-  ],
-};
 
 // 发现个bug，从二级页面返回时home的图标是一直在active状态的
-const ChatPanel = (props) => {
+const ChatPanel = () => {
   const [inputValue, setInputValue] = useState("");
-  const [talkLog, setTalkLog] = useState(message.talkLog);
+  const [talkLog, setTalkLog] = useState([]);
+  const [userName, setUserName] = useState()
   const params = useParams();
 
   // 根据Params.id获取对应id的聊天记录
   async function getTalkLogById() {
     const id = params.id
+    const url =  'https://mock.presstime.cn/mock/628a42981a23490028bc4a15/example/client/getTalkLogByID'
+    try{
+    const data = await axios
+      .get(url)
+      .then(response => response.data)
+      .catch(err => console.log(err))
+      setTalkLog(data.talkLog)
+      const getOtherUserName = () => {
+        for(const user of data.users){
+          if(user.userName !== myName)
+            setUserName(user.userName)
+        }
+      }
+      getOtherUserName()
+    }
+    catch(err) {console.log(err)}
     // console.log(id)
   }
 
   // 假设用户名为xiaoming
   const myName = "xiaoming";
-  const myUuid = 1
 
   useEffect(() => {
     getTalkLogById()
-    setTalkLog(message.talkLog);
   }, []);
 
   function handelSubmit() {
@@ -67,7 +50,7 @@ const ChatPanel = (props) => {
     const text = inputValue
     const newState = talkLog;
     newState.push({
-      user: { userName: myName, avatar: '', uuid: myUuid },
+      user: {userName: myName, avatar: ''},
       message: { type: "text", content: text },
       time: new Date().toLocaleString(),
     });
@@ -81,13 +64,17 @@ const ChatPanel = (props) => {
         right={<MoreOutline fontSize={24} />}
         className="top-nav-area fixed w-full top-0"
       >
-        对面名称(消息数)
+        {`${userName === undefined ? '加载中' : userName} ${talkLog.length === 0 ? '' : `(${talkLog.length})` }`}
       </NavHeader>
 
       <MessagePanel
         className="message-show-area mt-10"
       >
-        {talkLog.map((item, index) => {
+        {talkLog.length === 0 ? 
+        <div className="flex justify-center">
+        <SpinLoading color="default" />
+        </div>
+        : talkLog.map((item, index) => {
           return (
             <MessageBox
               key={index}

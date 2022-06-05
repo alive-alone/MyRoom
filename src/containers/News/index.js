@@ -79,7 +79,7 @@ function News() {
 
   return (
     <div>
-      <NewsPanel myName="xiaoming" refreashInfo={getDataAsync()} info={info} />
+      <NewsPanel myName="xiaoming" refreshEvent={getDataAsync} info={info} />
     </div>
   );
 }

@@ -57,8 +57,9 @@ function NewsPanel(props) {
           className="ptr"
           onRefresh={async () => {
             // 刷新操作
-            props.refreashInfo.then(data => {
-              setInfo(data)})
+            props.refreshEvent()
+              .then(response => setInfo(response))
+              .catch(err => console.log(err)) 
           }}
           renderText={(status) => {
             return <div>{statusRecord[status]}</div>;
